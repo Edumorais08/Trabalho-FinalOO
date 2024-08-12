@@ -41,8 +41,11 @@ O sistema deverá ainda ser capaz de impedir o cadastro de elementos do domínio
 Utilizar do nosso sistema acadêmico é bem simples, basta escolher a opção de cadastro que deseja com o número correspondente. Escolhida a opção de cadastro, seguimos os cadastros um a um, vejamos exemplos de cadastros de cada uma das opções do menu principal:
 
 Cadastro aluno - Seram solicitados nome (Arthur), cpf (123.456.789-01), email (arthur@gmail.com), matricula (241011666), curso (Eng. Software)
+
 Cadastro professores - Seram solicitados nome (Andre), cpf (123.456.789-02), email (andre@gmail.com), matricula FUB (05627014601), area de formação (Programação)
+
 Cadastro disciplina - Seram solicitados código (FGA0158), nome (Orientação a Objetos), número de créditos (4), carga horária (60)
+
 Cadastro turmas - Seram solicitados código (T01), dia e hora (24T23), semestre (3° Semestre), número de vagas (30)
 
 Além de realizar o cadastro de objetos, dentro de cada um dos cadastros temos outras opções, como a busca, remoção ou atulização de um objeto. Para acessar estes métodos basta fazer a escolha alguma destas opções e informar qual o objeto deseja realizar a busca/remoção/atualização e seguir como o programa pede
