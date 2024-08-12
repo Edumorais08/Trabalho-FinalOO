@@ -9,10 +9,7 @@ import exceptions.DisciplinaNaoAtribuidaException;
 import exceptions.ProfessorNaoAtribuidoException;
 
 import org.w3c.dom.ls.LSOutput;
-import view.MenuAluno;
-import view.MenuDisciplina;
-import view.MenuPrincipal;
-import view.MenuProfessor;
+import view.*;
 
 public class Principal {
 
@@ -20,39 +17,42 @@ public class Principal {
 	static CadastroProfessor cadProfessor;
 	static CadastroDisciplina cadDisciplina;
 	static CadastroTurma cadTurma;
-	
+
 	public static void main(String[] args) throws CampoEmBrancoException {
 		cadAluno = new CadastroAluno();
 		cadProfessor = new CadastroProfessor();
 		cadDisciplina = new CadastroDisciplina();
-		
-		int opcao = 0; 
-		
+		cadTurma = new CadastroTurma();
+
+		MenuTurma.setCadastros(cadProfessor, cadAluno, cadDisciplina);
+
+		int opcao = 0;
+
 		do {
 			try {
-			opcao = MenuPrincipal.menuOpcoes();
+				opcao = MenuPrincipal.menuOpcoes();
 
-			switch (opcao) {
-				case 1:
-					MenuAluno.menuAluno(cadAluno);
-					break;
-				case 2:
-					MenuProfessor.menuProfessor(cadProfessor);
-					break;
-				case 3:
-					MenuDisciplina.menuDisciplina(cadDisciplina);
-					break;
-				case 4:
-					JOptionPane.showMessageDialog(null, "Cadastro de turmas a ser implementado");
-					break;
-				case 0:
-					break;
-				default:
-					JOptionPane.showMessageDialog(null, "A Opção escolhida não é válida");
-					opcao = -1;
-					break;
+				switch (opcao) {
+					case 1:
+						MenuAluno.menuAluno(cadAluno);
+						break;
+					case 2:
+						MenuProfessor.menuProfessor(cadProfessor);
+						break;
+					case 3:
+						MenuDisciplina.menuDisciplina(cadDisciplina);
+						break;
+					case 4:
+						MenuTurma.menuTurma(cadTurma);
+						break;
+					case 0:
+						break;
+					default:
+						JOptionPane.showMessageDialog(null, "A Opção escolhida não é válida");
+						opcao = -1;
+						break;
 				}
-			} catch (NumberFormatException e) {
+			} catch (NumberFormatException | ProfessorNaoAtribuidoException | DisciplinaNaoAtribuidaException e) {
 				JOptionPane.showMessageDialog(null, "A Opção escolhida não é válida");
 				opcao = 0;
 			}

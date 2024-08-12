@@ -9,7 +9,7 @@ public class Turma {
             diaHora,
             semestre;
     int numVagas;
-    
+
     Professor professor;
     Disciplina disciplina;
     private List<Aluno>  alunos;
@@ -23,7 +23,7 @@ public class Turma {
         this.numVagas = numVagas;
         this.professor = professor;
         this.disciplina = disciplina;
-        this.alunos = new ArrayList<Aluno>();
+        this.alunos = new ArrayList<>(alunos);
     }
 
     public String getCodigo() {
@@ -40,19 +40,22 @@ public class Turma {
     }
 
     protected void finalize() throws Throwable {
-		System.out.println("Destruindo objeto: " + this);
-	}
+        System.out.println("Destruindo objeto: " + this);
+    }
 
     // lista de chamada!
     public String toString() {
-        String resposta = "TURMA: " + disciplina + "-" + codigo + " - VAGAS: " + numVagas + '\n';
-        resposta += "PROFESSOR: " + professor + '\n';
+        String resposta = "TURMA: " + codigo + " DISCIPLINA: " + disciplina.getNome() + '\n';
+        resposta +=  " VAGAS: " + numVagas + " PROFESSOR: " + professor.getNome() + '\n';
         resposta += "HORÁRIO: " + diaHora + " SEMESTRE: " + semestre + '\n';
 
+        String listaDeAlunos = "";
+        int i = 1;
+
         for (Aluno a : alunos) {
-            int i = 1;
-            resposta += i + " - " + a.getNome() + '\n';
+            listaDeAlunos = listaDeAlunos + i + ". " + a.getNome() + '\n';
+            i++;
         }
-        return resposta;
+        return resposta + listaDeAlunos;
     }
 }

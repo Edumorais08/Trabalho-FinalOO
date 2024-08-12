@@ -72,44 +72,59 @@ public class MenuProfessor {
 
         int opcao = -1;
         do {
-            String strOpcao = JOptionPane.showInputDialog(txt);
-            opcao = Integer.parseInt(strOpcao);
+            try {
+                String strOpcao = JOptionPane.showInputDialog(txt);
+                opcao = Integer.parseInt(strOpcao);
 
-            switch (opcao) {
-                case 1:
-                    Professor novoProfessor = dadosNovoprofessor();
-                    cadProfessor.cadastrarProfessor(novoProfessor);
-                    break;
+                switch (opcao) {
+                    case 0:
+                        return;
+                    case 1:
+                        Professor novoProfessor = dadosNovoprofessor();
+                        cadProfessor.cadastrarProfessor(novoProfessor);
+                        break;
 
-                case 2:
-                    String matriculaFUB = lerMatriculaFUB();
-                    Professor a = cadProfessor.pesquisarProfessor(matriculaFUB);
-                    if (a != null)
-                        JOptionPane.showMessageDialog(null, a.toString());
-                    break;
+                    case 2:
+                        String matriculaFUB = lerMatriculaFUB();
+                        Professor p = cadProfessor.pesquisarProfessor(matriculaFUB);
+                        if (p != null) {
+                            JOptionPane.showMessageDialog(null, p.toString());
+                            break;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "essa matrículaFUB não existe ou está errada!");
+                            break;
+                        }
 
-                case 3:
-                    matriculaFUB = lerMatriculaFUB();
-                    Professor novoCadastro = dadosNovoprofessor();
-                    boolean atualizado = cadProfessor.atualizarProfessor(matriculaFUB, novoCadastro);
-                    if (atualizado) {
-                        JOptionPane.showMessageDialog(null, "Cadastro atualizado.");
-                    }
-                    break;
+                    case 3:
+                        matriculaFUB = lerMatriculaFUB();
+                        Professor novoCadastro = dadosNovoprofessor();
+                        boolean atualizado = cadProfessor.atualizarProfessor(matriculaFUB, novoCadastro);
+                        if (atualizado) {
+                            JOptionPane.showMessageDialog(null, "Cadastro atualizado.");
+                        }
+                        break;
 
-                case 4:
-                    matriculaFUB = lerMatriculaFUB();
-                    Professor remover = cadProfessor.pesquisarProfessor(matriculaFUB);
-                    boolean removido = cadProfessor.removerProfessor(remover);
-                    if (removido) {
-                        JOptionPane.showMessageDialog(null, "Professor removido do cadastro");
-                        System.gc();
-                    }
+                    case 4:
+                        matriculaFUB = lerMatriculaFUB();
+                        Professor remover = cadProfessor.pesquisarProfessor(matriculaFUB);
+                        boolean removido = cadProfessor.removerProfessor(remover);
+                        if (removido) {
+                            JOptionPane.showMessageDialog(null, "Professor removido do cadastro!");
+                            System.gc();
+                            break;
+                        }
 
-                default:
-                    break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "A opção escolhida não é válida!");
+                        break;
+                }
+            } catch (CampoEmBrancoException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage() + " tente novamente!");
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "A opção escolhida não é válida!");
+                opcao = -1;
             }
-        } while (opcao != 0);
+        } while (opcao != 0) ;
         return;
     }
 }

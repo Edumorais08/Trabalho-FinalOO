@@ -64,7 +64,7 @@ public class MenuAluno {
 				+ "3 - Atualizar aluno\n"
 				+ "4 - Remover aluno\n"
 				+ "0 - Voltar para menu anterior";
-		
+
 		int opcao=-1;
 		do {
 			try {
@@ -86,10 +86,11 @@ public class MenuAluno {
 						Aluno a = cadAluno.pesquisarAluno(matricula);
 						if (a != null) {
 							JOptionPane.showMessageDialog(null, a.toString());
+							break;
 						} else {
 							JOptionPane.showMessageDialog(null, "essa matrícula não existe ou está errada!");
+							break;
 						}
-						break;
 
 					case 3:
 						matricula = lerMatricula();
@@ -107,6 +108,7 @@ public class MenuAluno {
 						if (removido) {
 							JOptionPane.showMessageDialog(null, "o Aluno foi removido com sucesso!");
 							System.gc();
+							break;
 						}
 
 					default:

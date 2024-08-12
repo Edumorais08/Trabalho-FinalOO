@@ -77,7 +77,7 @@ public class MenuTurma {
 
     //exception disciplinaonao atrib
     private static Disciplina lerDisciplina() throws DisciplinaNaoAtribuidaException {
-        String codigo = JOptionPane.showInputDialog("Informe o código da disciplina da turma: ");
+        String codigo = JOptionPane.showInputDialog("Informe o código da disciplina: ");
         Disciplina d = cadastroDisciplina.pesquisarDisciplina(codigo);
         if (d == null) {
             throw new DisciplinaNaoAtribuidaException("DISCIPLINA NAO EXISTENTE. ");
@@ -112,7 +112,7 @@ public class MenuTurma {
 
 
 
-    public static void menuDisciplina(CadastroTurma cadTurma) throws CampoEmBrancoException, ProfessorNaoAtribuidoException, DisciplinaNaoAtribuidaException {
+    public static void menuTurma(CadastroTurma cadTurma) throws CampoEmBrancoException, ProfessorNaoAtribuidoException, DisciplinaNaoAtribuidaException {
         String txt = """
                 Informe a opção desejada:
                 1 - Cadastrar Turma

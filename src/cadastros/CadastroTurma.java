@@ -1,6 +1,7 @@
 package cadastros;
 
 import app.Disciplina;
+import app.Aluno;
 import app.Professor;
 import app.Turma;
 
@@ -69,5 +70,5 @@ public class CadastroTurma {
         }
         return resposta.toString();
     }
-    
+
 }
