@@ -45,11 +45,11 @@ public class Turma {
 
     // lista de chamada!
     public String toString() {
-        String resposta = "TURMA: " + codigo + " DISCIPLINA: " + disciplina.getNome() + '\n';
-        resposta +=  " VAGAS: " + numVagas + " PROFESSOR: " + professor.getNome() + '\n';
-        resposta += "HORÁRIO: " + diaHora + " SEMESTRE: " + semestre + '\n';
+        String resposta = "TURMA: " + codigo + "    DISCIPLINA: " + disciplina.getNome() + '\n';
+        resposta +=  "VAGAS: " + numVagas + "   PROFESSOR: " + professor.getNome() + '\n';
+        resposta += "HORÁRIO: " + diaHora + "   SEMESTRE: " + semestre + '\n';
 
-        String listaDeAlunos = "";
+        String listaDeAlunos = "LISTA DE CHAMADA:" + '\n';
         int i = 1;
 
         for (Aluno a : alunos) {
