@@ -36,7 +36,7 @@ public class MenuTurma {
     private static String lerCodigo() throws CampoEmBrancoException {
         String codigo = JOptionPane.showInputDialog("Informe o código da turma: ");
         if (codigo.isEmpty()) {
-            throw new CampoEmBrancoException("ERRO AO LER O CODIGO");
+            throw new CampoEmBrancoException("Você esqueceu de colocar o código!");
         }
         return codigo;
     }
@@ -44,7 +44,7 @@ public class MenuTurma {
     private static int lerNumVagas() throws CampoEmBrancoException {
         String numVagas = JOptionPane.showInputDialog("Informe o número de vagas da turma: ");
         if (numVagas.isEmpty()) {
-            throw new CampoEmBrancoException("ERRO AO LER O NUMERO DE VAGAS. ");
+            throw new CampoEmBrancoException("Você esquceu de colocar o número de vagas!");
         }
         return Integer.parseInt(numVagas);
     }
@@ -52,7 +52,7 @@ public class MenuTurma {
     private static String lerSemestre() throws CampoEmBrancoException{
         String semestre = JOptionPane.showInputDialog("Informe o semestre da turma: ");
         if (semestre.isEmpty()) {
-            throw new CampoEmBrancoException("ERRO AO LER O SEMESTRE. ");
+            throw new CampoEmBrancoException("você esqueceu de colocar o semestre!");
         }
         return semestre;
     }
@@ -60,7 +60,7 @@ public class MenuTurma {
     private static String lerNome() throws CampoEmBrancoException {
         String nome = JOptionPane.showInputDialog("Informe o dia/Hora da turma: ");
         if (nome.isEmpty()) {
-            throw new CampoEmBrancoException("ERRO AO LER O NOME. ");
+            throw new CampoEmBrancoException("Você esqueceu de colocar dia/hora!");
         }
         return nome;
     }
@@ -70,7 +70,7 @@ public class MenuTurma {
         String matriculaFUB = JOptionPane.showInputDialog("Informe a matrículaFUB do professor da turma: ");
         Professor p = cadastroProfessor.pesquisarProfessor(matriculaFUB);
         if (p == null) {
-            throw new ProfessorNaoAtribuidoException("PROFESSOR NAO CADASTRADO. ");
+            throw new ProfessorNaoAtribuidoException("O professor não está cadastrado!");
         }
         return p;
     }
@@ -80,7 +80,7 @@ public class MenuTurma {
         String codigo = JOptionPane.showInputDialog("Informe o código da disciplina: ");
         Disciplina d = cadastroDisciplina.pesquisarDisciplina(codigo);
         if (d == null) {
-            throw new DisciplinaNaoAtribuidaException("DISCIPLINA NAO EXISTENTE. ");
+            throw new DisciplinaNaoAtribuidaException("A disciplina não está cadastrada!");
         }
         return d;
     }
@@ -90,11 +90,12 @@ public class MenuTurma {
         List<Aluno> alunos = new ArrayList<>();
         //int vagasRestantes = numVagas;
         for (int i = 0;i < numVagas; i++) {
-            String matricula = JOptionPane.showInputDialog("Informe a matrícula do aluno para adicionar na turma: ");
+            String matricula = JOptionPane.showInputDialog("Informe a matrícula do aluno para adicionar na turma ou digite '0' para parar! ");
 
-            if (matricula.isEmpty()) {
+            if (matricula.isEmpty() || matricula.equals("0")) {
                 break;
             }
+
             Aluno aluno = cadastroAluno.pesquisarAluno(matricula);
             if (aluno == null) {
                 JOptionPane.showMessageDialog(null, "Aluno não encontrado.");
@@ -130,6 +131,9 @@ public class MenuTurma {
                 opcao = Integer.parseInt(strOpcao);
 
                 switch (opcao) {
+                    case 0:
+                        return;
+
                     case 1:
                         Turma novaTurma = dadosNovaTurma();
                         cadTurma.cadastrarTurma(novaTurma);
@@ -138,12 +142,21 @@ public class MenuTurma {
                     case 2:
                         String codigo = lerCodigo();
                         Turma t = cadTurma.pesquisarTurma(codigo);
-                        if (t != null)
+                        if (t != null) {
                             JOptionPane.showMessageDialog(null, t.toString());
-                        break;
+                            break;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "esse código não existe ou está errado!");
+                            break;
+                        }
 
                     case 3:
                         codigo = lerCodigo();
+                        Turma tur = cadTurma.pesquisarTurma(codigo);
+                        if (tur == null) {
+                            JOptionPane.showMessageDialog(null, "Esse código não existe ou está errado!");
+                            break;
+                        }
                         Turma novoCadastro = dadosNovaTurma();
                         boolean atualizado = cadTurma.atualizarTurma(codigo, novoCadastro);
                         if (atualizado) {
@@ -154,24 +167,35 @@ public class MenuTurma {
                     case 4:
                         codigo = lerCodigo();
                         Turma remover = cadTurma.pesquisarTurma(codigo);
+                        if (remover == null) {
+                            JOptionPane.showMessageDialog(null, "Esse código não existe ou está errado!");
+                            break;
+                        }
                         boolean removido = cadTurma.removerTurma(remover);
                         if (removido) {
                             JOptionPane.showMessageDialog(null, "Turma removida do cadastro");
                             System.gc();
+                            break;
                         }
                     case 5:
                         codigo = lerCodigo();
-                        cadTurma.imprimirListaPresenca(codigo);
+                        Turma tu = cadTurma.pesquisarTurma(codigo);
+                        if (tu == null) {
+                            JOptionPane.showMessageDialog(null, "Esse código não existe ou está errado!");
+                            break;
+                        }
+                        JOptionPane.showMessageDialog(null, tu);
                     default:
+                        JOptionPane.showMessageDialog(null, "Opção inválida. Por favor, escolha uma opção válida.");
                         break;
                 }
             } catch (ProfessorNaoAtribuidoException e) {
                 JOptionPane.showMessageDialog(null, "Nenhum Professor associado a essa turma! ");
-                //} catch (DisciplinaNaoAtribuidaException) {
-                //    JOptionPane.showMessageDialog(null, "Nenhuma Disciplina associada a essa turma! ");
+            } catch (DisciplinaNaoAtribuidaException e) {
+                    JOptionPane.showMessageDialog(null, "Nenhuma Disciplina associada a essa turma! ");
             }  catch (CampoEmBrancoException e) {
                 JOptionPane.showMessageDialog(null,
-                        "Opção em branco:\nCampo " + e.getMessage() + " esta em branco, tente novamente novamente");
+                        e.getMessage() + " tente novamente!");
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Opção invalida");
                 opcao = -1;

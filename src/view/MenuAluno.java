@@ -3,6 +3,7 @@ package view;
 import javax.swing.JOptionPane;
 
 import app.Aluno;
+import app.Professor;
 import cadastros.CadastroAluno;
 import exceptions.CampoEmBrancoException;
 
@@ -94,6 +95,11 @@ public class MenuAluno {
 
 					case 3:
 						matricula = lerMatricula();
+						Aluno al = cadAluno.pesquisarAluno(matricula);
+						if (al == null) {
+							JOptionPane.showMessageDialog(null, "Essa matrícula não existe ou está errada!");
+							break;
+						}
 						Aluno novoCadastro = dadosNovoAluno();
 						boolean atualizado = cadAluno.atualizarAluno(matricula, novoCadastro);
 						if (atualizado) {

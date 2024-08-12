@@ -67,6 +67,7 @@ public class MenuDisciplina {
                 opcao = Integer.parseInt(strOpcao);
 
                 switch (opcao) {
+                    case 0: return;
                     case 1:
                         Disciplina novaDisciplina = dadosNovaDisciplina();
                         cadDisciplina.cadastrarDisciplina(novaDisciplina);
@@ -74,13 +75,22 @@ public class MenuDisciplina {
 
                     case 2:
                         String codigo = lerCodigo();
-                        Disciplina a = cadDisciplina.pesquisarDisciplina(codigo);
-                        if (a != null)
-                            JOptionPane.showMessageDialog(null, a.toString());
+                        Disciplina d = cadDisciplina.pesquisarDisciplina(codigo);
+                        if (d == null) {
+                            JOptionPane.showMessageDialog(null, "Esse código não existe ou está errado!");
+                            break;
+                        } else {
+                            JOptionPane.showMessageDialog(null, d.toString());
+                        }
                         break;
 
                     case 3:
                         codigo = lerCodigo();
+                        Disciplina di = cadDisciplina.pesquisarDisciplina(codigo);
+                        if (di == null) {
+                            JOptionPane.showMessageDialog(null, "Esse código não existe ou está errado!");
+                            break;
+                        }
                         Disciplina novoCadastro = dadosNovaDisciplina();
                         boolean atualizado = cadDisciplina.atualizarDisciplina(codigo, novoCadastro);
                         if (atualizado) {
@@ -91,13 +101,17 @@ public class MenuDisciplina {
                     case 4:
                         codigo = lerCodigo();
                         Disciplina remover = cadDisciplina.pesquisarDisciplina(codigo);
+                        if (remover == null) {
+                            JOptionPane.showMessageDialog(null, "Esse código não existe ou está errado!");
+                            break;
+                        }
                         boolean removido = cadDisciplina.removerDisciplina(remover);
                         if (removido) {
                             JOptionPane.showMessageDialog(null, "Disciplina removida do cadastro");
                             System.gc();
                         }
-
                     default:
+                        JOptionPane.showMessageDialog(null, "Opção inválida. Por favor, escolha uma opção válida.");
                         break;
                 }
             } catch (CampoEmBrancoException e) {

@@ -47,7 +47,7 @@ public class Turma {
     public String toString() {
         String resposta = "TURMA: " + codigo + "    DISCIPLINA: " + disciplina.getNome() + '\n';
         resposta +=  "VAGAS: " + numVagas + "   PROFESSOR: " + professor.getNome() + '\n';
-        resposta += "HORÁRIO: " + diaHora + "   SEMESTRE: " + semestre + '\n';
+        resposta += "HORÁRIO: " + diaHora + "   SEMESTRE: " + semestre + '\n' + '\n';
 
         String listaDeAlunos = "LISTA DE CHAMADA:" + '\n';
         int i = 1;

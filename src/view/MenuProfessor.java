@@ -1,6 +1,7 @@
 package view;
 
 import app.Aluno;
+import app.Disciplina;
 import app.Professor;
 import cadastros.CadastroAluno;
 import cadastros.CadastroProfessor;
@@ -97,6 +98,11 @@ public class MenuProfessor {
 
                     case 3:
                         matriculaFUB = lerMatriculaFUB();
+                        Professor prof = cadProfessor.pesquisarProfessor(matriculaFUB);
+                        if (prof == null) {
+                            JOptionPane.showMessageDialog(null, "Essa matrículaFUB não existe ou está errada!");
+                            break;
+                        }
                         Professor novoCadastro = dadosNovoprofessor();
                         boolean atualizado = cadProfessor.atualizarProfessor(matriculaFUB, novoCadastro);
                         if (atualizado) {
