@@ -46,6 +46,6 @@ Cadastro professores - Seram solicitados nome (Andre), cpf (123.456.789-02), ema
 
 Cadastro disciplina - Seram solicitados código (FGA0158), nome (Orientação a Objetos), número de créditos (4), carga horária (60)
 
-Cadastro turmas - Seram solicitados código (T01), dia e hora (24T23), semestre (3° Semestre), número de vagas (30)
+Cadastro turmas - Seram solicitados código (T01), dia e hora (24T23), semestre (3° Semestre), número de vagas (30), matrículaFUB do professor(05627014601), código da disciplina(FGA0158), matrícula do aluno(241011666)
 
-Além de realizar o cadastro de objetos, dentro de cada um dos cadastros temos outras opções, como a busca, remoção ou atulização de um objeto. Para acessar estes métodos basta fazer a escolha alguma destas opções e informar qual o objeto deseja realizar a busca/remoção/atualização e seguir como o programa pede
+Além de realizar o cadastro de objetos, dentro de cada um dos cadastros temos outras opções, como a busca, remoção ou atulização de um objeto e imprimir a lista de presença da turma. Para acessar estes métodos basta fazer a escolha alguma destas opções e informar qual o objeto deseja realizar a busca/remoção/atualização e seguir como o programa pede
